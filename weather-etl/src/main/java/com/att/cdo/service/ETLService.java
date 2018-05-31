@@ -64,7 +64,7 @@ public class ETLService implements Logging {
 
 	/**
 	 * groupRecords - is intended to do multiple aggregations but due to time
-	 * will only do sums...
+	 * will only do sums... broke with code changes... TODO: Fix
 	 * 
 	 * @param group
 	 * @param records
@@ -95,7 +95,7 @@ public class ETLService implements Logging {
 				} else {
 					GroupResult results = new GroupResult();
 					results.setRecord(record);
-					results.setAggregation(new Double(record[header.get(group.getAggregationField())]));
+					results.setAggregation(value);
 					aggregator.put(key, results);
 				}
 			}

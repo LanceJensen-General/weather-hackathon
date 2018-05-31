@@ -2,6 +2,8 @@ package com.att.cdo.input.etl;
 
 import java.util.List;
 
+import com.att.cdo.parser.GenericType;
+
 public class Group {
 
 	private List<String> fields;
@@ -11,6 +13,7 @@ public class Group {
 	public List<String> getFields() {
 		return fields;
 	}
+	@GenericType(genericType=String.class)
 	public void setFields(List<String> fields) {
 		this.fields = fields;
 	}

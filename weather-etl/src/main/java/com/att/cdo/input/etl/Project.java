@@ -2,6 +2,8 @@ package com.att.cdo.input.etl;
 
 import java.util.List;
 
+import com.att.cdo.parser.GenericType;
+
 public class Project {
 
 	public List<String> columns;
@@ -10,6 +12,7 @@ public class Project {
 		return columns;
 	}
 
+	@GenericType(genericType=String.class)
 	public void setColumns(List<String> columns) {
 		this.columns = columns;
 	}

@@ -11,6 +11,7 @@ import com.att.cdo.parser.InvalidPojoSetterConfiguration;
 import com.att.cdo.parser.Parser;
 import com.att.cdo.service.ETLService;
 import com.att.cdo.service.FTPService;
+import com.att.cdo.service.JoinService;
 import com.att.cdo.trait.Logging;
 
 /**
@@ -23,6 +24,7 @@ public class Weather {
 	
 	private static FTPService ftpService = new FTPService();
 	private static ETLService etlService = new ETLService();
+	private static JoinService joinService = new JoinService();
 	
 	private static Logger logger = Logger.getLogger(Weather.class.getName());
 
@@ -35,7 +37,7 @@ public class Weather {
 			Parser.parse(args, configuration);
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | IlleagalArgumentException
 				| InvalidPojoSetterConfiguration | InvalidConfigurationException e) {
-			getLogger().log(Level.ALL,"An error occured. Please check your arguments.\n",e);
+			getLogger().log(Level.SEVERE,"An error occured. Please check your arguments.\n",e);
 
 		}	
 		executeWeatherWorkflow(configuration);
@@ -50,6 +52,10 @@ public class Weather {
 		
 		if(configuration.getEtlConfiguration() != null) {
 			etlService.process(configuration.getEtlConfiguration());
+		}
+		
+		if(configuration.getTableJoinConfiguration() != null) {
+			joinService.process(configuration.getTableJoinConfiguration());
 		}
 		
 		getLogger().info("Your run completed successfully.");

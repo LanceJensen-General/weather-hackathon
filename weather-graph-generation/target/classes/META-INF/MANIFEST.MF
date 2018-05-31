@@ -1,5 +1,8 @@
 Manifest-Version: 1.0
 Built-By: lj556b
+Class-Path: commandline-parser-0.0.1-SNAPSHOT.jar utils-0.0.1-SNAPSHOT
+ .jar
 Build-Jdk: 1.8.0_144
 Created-By: Maven Integration for Eclipse
+Main-Class: com.att.cdo.weather.ExtractGraph
 

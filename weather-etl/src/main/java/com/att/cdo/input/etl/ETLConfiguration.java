@@ -4,6 +4,8 @@ import java.io.File;
 
 import java.util.List;
 
+import com.att.cdo.parser.GenericType;
+
 public class ETLConfiguration {
 	
 	private String delimiterPattern = "|";
@@ -11,11 +13,12 @@ public class ETLConfiguration {
 	private File inputTo;
 	private File outputTo = new File(".");
 	private Integer skipLines;
+	
 	private Select select;
 	private Group group;
 	private Project project;
 	private Transform transform;
-	
+
 	public String getDelimiterPattern() {
 		return delimiterPattern;
 	}
@@ -25,6 +28,7 @@ public class ETLConfiguration {
 	public List<String> getHeaders() {
 		return headers;
 	}
+	@GenericType(genericType=String.class)
 	public void setHeaders(List<String> headers) {
 		this.headers = headers;
 	}

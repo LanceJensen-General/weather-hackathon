@@ -12,25 +12,41 @@ Phase 2: Data preparation
     b. Join the station data to the weather data.
     c. For each day 12:00 temperature reading where the previous day did not have precipitation to avoid the washing effect
 Phase 3: Create a graphml export of the that contains the temp,lat, and long on the vertexes. The graph edges include the 10 nearest neighbors and the distance to that neighbor.
-    e. If all goes well upto this point I should be able to update the graph in gremlin to contain the temperature gradient between the vertexes. Using a hill climber algorithm of maximizing the gradient will lead to the local maximum which should be as close to a city center as the weather data will allow.
-Phase 4: Loading the data to a tinker graph and following the edge with the maximum tempreture gradient to the highest temp, in theory yielding a city center.
+    e. If all goes well upto this point I should be able to update the graph in Gremlin to contain the temperature gradient between the vertexes. Using a hill climber algorithm of maximizing the gradient will lead to the local maximum which should be as close to a city center as the weather data will allow.
+Phase 4: Loading the data to a tinker graph and following the edge with the maximum temperature gradient to the highest temp, in theory yielding a city center. (graph walking query in progress)
 Phase 5: Finish packaging the modules as executables and complete the documentation.
     
 ## Zigging and Zagging
-My plan was too aggressive for the 2 days I had to work on it. I ran into many unforseen issues such as duplicate stations, stations USAF-WBAN-<YYYY>.gz files not existing in the repo directories, special characters that where incompatable with graphml. I completed phases 1,2, and 3 to various degrees and hope to finish Phase 4 before the interview for demo purposes.
-
+My plan was too aggressive for the 2 days I had to work on it. I ran into many unforeseen issues such as duplicate stations, stations temperature files not pulling down by ftp(about 40-50%), special characters that where incompatable with graphml. I have completed phases 1,2,3,4 and 
 ## Building
+This code was written to allow me to flexibly explore the data in java.  The unit tests where examples of what i was doing on the command line with the tool and are not transportable. For that reason, I am instructing you to skip the tests during build and look at the running section as an example of how to run the code.
+
 
     git clone https://github.com/LanceJensen-General/weather-hackathon.git
-    mvn clean install -DskipTests=true # I probably have broken tests as this was hacked together...
+    mvn clean install -DskipTests=true 
     
 ## Running
 
-Each main method has a reflective parser.  Look at the projects input configuration pojo and use flags to initalize it:
+Each main method has a reflective parser.  Look at the projects input configuration pojo and use flags to initialize it. Example work flow below.  Be careful on your flag initialization as there is no robust error handling. See unit test for more examples
 
-Example java -jar weather-etl -weatherPullConfiguration --pullFile ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-history.txt --outputDirectory /tmp/weatherDownloadDirectory
+Step 1: Download the isd-history file:
 
-Or you can look at the unit tests and run it from there...
+    java -cp weather-etl-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.att.cdo.Weather -weatherPullConfiguration --pullFile ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-history.txt --outputDirectory /tmp/weatherDownloadDirectory
+
+Step 2: Filter for stations found in the US only
+  
+    java -cp weather-etl-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.att.cdo.Weather -etlConfiguration --delimiterPattern '^(.{6})\\s(.{5})\\s(.{29})\\s(.{4})\\s(.{2})\\s(.{5})\\s(.{7})\\s(.{8})\\s(.{7})\\s(.{8})\\s(.{8})$' --headers USAF WBAN STATION NAME CTRY ST CALL LAT LON ELEV(M) BEGIN END --inputTo /tmp/weatherDownloadDirectory/isd-history.txt --outputTo /tmp/weatherDownloadDirectory/usStations.txt --skipLines 22 --select ---whereColumn CTRY ---matches '^US.*$' 
+
+Step 3: Filter for stations in states (eliminate floating stations)
+
+    java -cp weather-etl-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.att.cdo.Weather -etlConfiguration --delimiterPattern '|' --inputTo /tmp/weatherDownloadDirectory/usStations.txt --outputTo /tmp/weatherDownloadDirectory/usStateStations.txt --select ---whereColumn ST ---matches '[A-Z]{2}' --headers USAF WBAN STATION NAME CTRY ST CALL LAT LON 'ELEV(M)' BEGIN END
+
+Step 4: Filter for stations open in 2017/2018
+
+    java -cp weather-etl-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.att.cdo.Weather -etlConfiguration --delimiterPattern '|' --inputTo /tmp/weatherDownloadDirectory/usStateStations.txt --outputTo /tmp/weatherDownloadDirectory/currentStationsUS.txt --select ---whereColumn END ---matches '^201[78]\\d{4}$' --headers USAF WBAN STATION NAME CTRY ST CALL LAT LON 'ELEV(M)' BEGIN END
+
+Other examples of filtering grouping aggregating ect but will have to be modified.
+
 
 ## Summary
 

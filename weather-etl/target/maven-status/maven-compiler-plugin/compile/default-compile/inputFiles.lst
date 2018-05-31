@@ -1,2 +1,15 @@
-/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/Configuration.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/service/GroupResult.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/etl/ETLConfiguration.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/join/JoinConfiguration.java
 /Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/Weather.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/etl/Group.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/service/FTPService.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/service/JoinService.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/etl/Project.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/Configuration.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/join/FileTable.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/etl/Transform.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/etl/Select.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/ftp/FTPPullConfiguration.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/input/join/Fields.java
+/Users/lj556b/Documents/workspace-sts-3.8.4.RELEASE/weather-skills-test/weather-etl/src/main/java/com/att/cdo/service/ETLService.java

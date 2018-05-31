@@ -1,0 +1,12 @@
+com/att/cdo/input/etl/ETLConfiguration.class
+com/att/cdo/service/GroupResult.class
+com/att/cdo/input/etl/Transform.class
+com/att/cdo/input/etl/Project.class
+com/att/cdo/service/JoinService$1.class
+com/att/cdo/input/ftp/FTPPullConfiguration.class
+com/att/cdo/service/FTPService.class
+com/att/cdo/service/ETLService.class
+com/att/cdo/Weather.class
+com/att/cdo/input/etl/Select.class
+com/att/cdo/input/Configuration.class
+com/att/cdo/input/etl/Group.class
