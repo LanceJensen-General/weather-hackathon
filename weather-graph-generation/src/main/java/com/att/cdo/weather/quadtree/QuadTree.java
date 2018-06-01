@@ -13,8 +13,6 @@ import com.att.cdo.weather.spatial.ImmutablePoint;
  * QuadTree - is a data structure that allows you to insertion sort a 2d space
  * by dynamically bucking points in in recursively smaller sub quadrants so that
  * each leaf has at most 3 siblings.
- * 
- * @author Lance Jensen email:lj556b@att.com phone:214-882-3888
  */
 public class QuadTree implements Logging {
 

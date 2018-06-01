@@ -5,8 +5,6 @@ import com.att.cdo.weather.spatial.Point;
 /**
  * NeigborDistance - is a way of encapsulating the distance between neighboring
  * points in the QuadTree;
- * 
- * @author Lance Jensen email:lj556b@att.com phone:214-882-3888
  */
 public class NeighborDistance implements Comparable<NeighborDistance> {
 	

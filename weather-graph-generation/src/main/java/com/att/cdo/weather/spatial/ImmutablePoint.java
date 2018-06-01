@@ -3,8 +3,6 @@ package com.att.cdo.weather.spatial;
 /**
  * ImmutablePoint - was designed to be a holder of point coordinates that
  * can not be changed.
- * 
- * @author Lance Jensen email:lj556b@att.com phone:214-882-3888
  */
 public class ImmutablePoint implements Point {
 

@@ -8,8 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * Hints - are a annotations used on setters of pojos in the 
  * parser to indicate the the type of a field with a generic parameterization.
- * 
- * @author Lance Jensen email:lj556b@att.com phone:214-882-3888
  *
  */
 @Retention(RetentionPolicy.RUNTIME)

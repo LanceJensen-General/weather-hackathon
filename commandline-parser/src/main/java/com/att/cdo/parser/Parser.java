@@ -17,9 +17,6 @@ import com.att.cdo.util.ReflectionUtils.EncapsulationPair;
  * Parser - is a class that utilizes reflection to automatically parse command
  * line arguments to fields in a pojo. A leading dash indicates an argument and
  * repeated - indicate sub arguments.
- * 
- * @author Lance Jensen email:lj556b@att.com phone:214-882-3888
- *
  */
 public class Parser {
 

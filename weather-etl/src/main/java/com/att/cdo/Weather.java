@@ -17,8 +17,6 @@ import com.att.cdo.trait.Logging;
 /**
  * Weather - is the entry point to all functionality in the
  * weather application.
- * @author Lance Jensen email:lj556b@att.com phone:214-882-3888
- *
  */
 public class Weather {
 	

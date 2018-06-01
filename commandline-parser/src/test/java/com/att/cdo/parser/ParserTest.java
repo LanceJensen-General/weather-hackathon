@@ -17,8 +17,6 @@ import com.att.cdo.pojo.TestPojo;
 /**
  * ParserTest - is a junit test class designed to verify that the Parser can
  * parse data to a pojo.
- * 
- * @author Lance Jensen email:lj556b@att.com phone:214-882-3888
  *
  */
 public class ParserTest {

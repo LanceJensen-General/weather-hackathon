@@ -23,8 +23,6 @@ import com.att.cdo.weather.quadtree.SpaceTimeViolation;
 
 /**
  * GraphGenerationService - builds a graphMl file from the data in the station temperature information.
- * 
- * @author Lance Jensen email:lj556b@att.com phone:214-882-3888
  */
 public class GraphGenerationService implements Logging {
 	

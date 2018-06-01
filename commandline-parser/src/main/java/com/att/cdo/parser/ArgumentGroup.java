@@ -9,8 +9,6 @@ import java.util.regex.Pattern;
 /**
  * ArgumentGroups - is a class that handles the grouping and nested
  * resolution of arguments.
- * 
- * @author Lance Jensen email:lj556b@att.com phone:214-882-3888
  *
  */
 public class ArgumentGroup {
