@@ -58,6 +58,11 @@ Accomplishments:
 2.  ETL application - Since I could not use spark I had to roll my own ETL and ftp processing tools. In hindsight I should have just sed/awk/paste/cut/grep my way to the data I needed. I would have found the issues with the data faster without having to debug/write code and could have focused solely on graph translation.
 3. Graph translation application - is a success and I was able to translate station and temperature gradient routes between stations to a graph and load it into tinker graph.
 4. Algorithm - Wrote a quad tree to implement finding nearest neighbors through recursive bin packing and dividing/resizing. Not my best work probably 7/10 quality but actually building it in this short of time was an accomplishment.
-5. Worked hard - wrote approximately 44672 lines of code in about 20 hrs. failed in multiple different ways, continued to change and adapt and eventually ended with a graph database primed to prove my gradient accent algorithm on a graph will find cities.  
+5. Worked hard - wrote approximately 4475 lines of code in about 20 hrs. Spent about another 10-15 on learning the data sets adn understanding what was there. I failed in multiple different ways, continued to change and adapt and eventually ended with a graph database and some results to review. 
 
+Work To Do:
+- improve the nearest neighbors algorithm
+- clean up code by using better class hierarchy and better documentation.
+- finish Gremlin query
+- add error checking and input validation.
 Copyright Lance Jensen all rights reserved

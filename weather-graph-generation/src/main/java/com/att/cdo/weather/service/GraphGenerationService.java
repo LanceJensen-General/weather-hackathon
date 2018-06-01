@@ -1,17 +1,21 @@
 package com.att.cdo.weather.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 
 import com.att.cdo.trait.Logging;
 import com.att.cdo.weather.domain.WeatherStation;
+import com.att.cdo.weather.graph.Vertex;
 import com.att.cdo.weather.input.Configuration;
 import com.att.cdo.weather.quadtree.NeighborDistance;
 import com.att.cdo.weather.quadtree.QuadTree;
@@ -25,7 +29,7 @@ import com.att.cdo.weather.quadtree.SpaceTimeViolation;
 public class GraphGenerationService implements Logging {
 	
 	
-	private static final int LAT = 6, LONG = 7, STATION_NAME = 2, TEMPRETURE = 8, USAF = 0, WBAN = 1;
+	private static final int LAT = 6, LONG = 7, STATION_NAME = 2, TEMPRETURE = 12, USAF = 0, WBAN = 1;
 
 	public void createGraph(Configuration configuration) throws IOException {
 		
@@ -56,9 +60,13 @@ public class GraphGenerationService implements Logging {
 		stations.removeAll(duplicateLocations);
 		
 		getLogger().info("Writing edge information.");
+		List<Vertex> internalGraph = new ArrayList<Vertex>(stations.size());
 		for(WeatherStation station : stations) {
+			Vertex stationVertex = new Vertex(station);
+			internalGraph.add(stationVertex.getId(),stationVertex);
 			List<NeighborDistance> neighbors = quadTree.findNearestNeighbors(station, 10, false);
 			for(NeighborDistance edge : neighbors) {
+				stationVertex.addEdge(edge);
 				graphWriter.write(GraphMl.getEdgeFor(edge, id));
 				graphWriter.flush();
 				id++;
@@ -69,7 +77,36 @@ public class GraphGenerationService implements Logging {
 		graphWriter.write(GraphMl.getFileClose());
 		graphWriter.flush();
 		graphWriter.close();
-
+		
+		int nodesToCheck = internalGraph.size()/20;
+		getLogger().info("Performing hill climber algorithm for " + nodesToCheck + " random nodes.");
+		Random random = new Random();
+		HashSet<WeatherStation> localMaximum = new HashSet<WeatherStation>();
+		for(int selection = 0; selection < nodesToCheck; selection++) {
+			HashSet<Vertex> cycleDetector = new HashSet<Vertex>();
+			Vertex currentVertex = internalGraph.get(random.nextInt(internalGraph.size()));
+			while(!cycleDetector.contains(currentVertex)) {
+				cycleDetector.add(currentVertex);
+				if(currentVertex.getMaxGradientEdge().getGradient() > 0) {
+					currentVertex = internalGraph.get(currentVertex.getMaxGradientEdge().getInVertexId());
+				} else {
+					getLogger().info("Local Maximum added to results.");
+					localMaximum.add(currentVertex.getNode());
+					break;
+				}
+			}
+		}
+		
+		getLogger().info("Printing the results of the hill climber algorithm.");
+		BufferedWriter resultsWriter = new BufferedWriter(new FileWriter(new File(configuration.getOutputGraphMlFile().getParentFile(),"temp-results.csv")));
+		for(WeatherStation station : localMaximum) {
+			String recordLine = station.getLatitude()+ "," + station.getLongitude() + "," + station.getStationName() + "\n";
+			getLogger().info(recordLine);
+			resultsWriter.write(recordLine);
+		}
+		resultsWriter.flush();
+		resultsWriter.close();
+		
 	}
 
 	private List<WeatherStation> getStations(List<String> stationLines) {
